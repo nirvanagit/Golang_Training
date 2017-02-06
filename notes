@@ -1,3 +1,450 @@
 Important links:
 golang.org: how to write effective go
 golang.org: identifiers.
+golang-book: https://www.golang-book.com/books/intro
+golang blog
+forum for golang: https://forum.golangbridge.org/
+forum by : Dave Cheney
+Problems: Project euler
+godoc.org
+book: golang
+book: The way to go
+
+https://research.swtch.com/interfaces
+
+Good explanation of interface{} http://jordanorelli.com/post/32665860244/how-to-use-interfaces-in-go
+
+Another way of testing your code: https://blog.golang.org/examples
+Should use golint to check your style
+
+See composition of a struct by Bill Kennedy
+
+Google drive link from Todd: https://drive.google.com/drive/folders/0B22KXlqHz6ZNfjNXTzk1U3JHUkJ6VjJ3dnJKNzVtNjRUM3Q2WFNqWGI2Q3RadERqUlVrOEU
+
+**************************************
+How computers work
+Todd Mcleods @ youtube Computer Concepts: https://www.youtube.com/playlist?list=PLSak_q1UXfPr_OzdhK6QWLJVXRmqef7ly
+
+Computers are base 2 (binary digits 2)
+
+Analogy of how computers work (On/Off states)
+If you have x light(s) how many messages can you convey?
+
+1 - 2 messages
+2 - 4 messages
+3 - 8 messages
+
+Formula: 2 power n
+Where n is the number of lights
+
+
+Generation of computers:
+1st generation computers: Vaccuum tubes
+
+First computer eniac: was A vaccuum tube.
+Vaccuum tube were checked if the computer was in an off or an on state
+
+Grass Hopper debugging: Moths needs to fly in the vaccuum tubes (computers), and ppl who had to go inside
+the vaccuum tubes to get the bugs out hence debug
+
+2nd gen computers: transistors
+Were able to store in transistors. When I type A they were stored in 8 or 16 types of arrangements
+
+3rd gen computers: Integrated Circuits (Chips - silicon wafer: Makes fake breasts and computers :D)
+Each chips can have billions of computers which can be in on/off states
+
+4th gen computers: Microprocessors(CPU's)
+First silicon chip had 2300 transistors in it
+Moore's law: every year it doubles
+
+In 2011: 2.6 Billion transistors
+
+All basic languages were developed when there was only 1 core
+
+Golang is the only language which was made since more than 1 core computers came
+
+
+
+Bits = Binary Digits
+**************************************
+
+**************************************
+Numeral Systems
+
+Writing system for expressing numbers (quantity of numbers)
+
+- Decimal : 0 - 9 (Base 10)
+Humans understand this most naturally
+
+- Binary : 0 - 1 (Base 2)
+Its either off or on
+Computers store binary numbers easily because they have switches that are either on or off
+Computers are on/off machines
+
+- Hexadecimal : 0 - 9, A - F
+Hexa - 6; Decimal - 10 -> Hence hexadecimal
+Has a 0x prefix
+
+We use hexadecimal because to store a massive number, hexadecimal will require less storage to store that number.
+As hexadecimal scales rapidly compared to binary and decimal systems
+
+- Octal : (Base 8)
+Why do we have this? Because we works a lot with bytes (8 bits)
+* How do we store text in computers
+
+-- Ascii: American Standard Code for Information Interchange
+Coding scheme for english
+Uses 7 bits to store information. For e.g. A is 100 0001 in binary.
+7 bits (or lights) can have 2 power 7 combinations, which equals 128. Which worked out pretty well for english as
+it only has 26 characters.
+
+With 128 (0 - 127) characters we could not store all the different characters in the world for e.g. different languages
+hindi, mandarin, japanese etc.
+
+-- UTF-8:
+Unicode Consortium.
+
+Has a list of more than a 100, 000 characters which covers all alphabets/characters in any language
+For english they still used ASCII
+
+Uses 1-4 bytes
+
+Youtube reference on number systems for computers: https://www.youtube.com/watch?v=MijmeoH9LT4
+**************************************
+
+Ardanlabs training - ardanlabs.com. Lots of training code available on github
+His blog: goinggo
+
+**************************************
+Language Fundamentals:
+
+- For anything to be executable it should have a package main and func main
+
+- Anything lowercase is not exported outside the package
+
+- go basic commands:
+* go build: Creates an executable if there is a main package and func
+* go run: Runs the main package and main func
+* go clean: Removes the executables from the directories
+* go install: When we run this for a package which has a main package and func it would
+  puts the executable in $GOPATH/bin + it would keep it inside $GOPATH/pkg and creates an archive file
+  If the package does not have a main package of func then it would only create an archive file in
+  $GOPATH/pkg
+
+
+Shorthand notation can only be used inside func
+
+Declaration with var, all variables are assigned a default value
+
+* Scope: universe, package, file, block (curly braces)
+
+Order does not matter when variable declared and assigned in the outerscope, it would be accessible
+inside the scope (this is called closure)
+e.g.
+package main
+import "fmt"
+func main() {
+    fmt.Println(y)
+}
+
+var y = 42 // This would be accessible inside main
+// as it is in the outer scope which encloses the main function
+
+- import statements have file level scope
+
+- constants is a parallel type. Golang does not contain
+constants as a type
+
+There are TYPED and UNTYPED constantso
+const hello = "Hello, World" // Untyped
+const hello string = "Hello, World" // Typed
+
+UNTYPED constants: a constant value that does not yet have a fixed type:
+    a "kind"
+    not yet forced to obey the strict rules that prevent combining differently typed values
+
+    If we didn't have UNTYPED constants (constants of a kind), then we would have to do conversion on every
+    literal value we used.
+
+**************************************
+
+**************************************
+Memory Addresses
+**************************************
+**************************************
+Pointers
+& - memory address
+* - pointer to the address
+
+Everything in golang is pass by value
+a := 5
+var p *int = &a // referencing a memory address
+fmt.Printf(*p) // dereferencing, prints 5
+**************************************
+
+**************************************
+Control Flow
+
+Rune: character of int32 type
+declaration is: goo := 'a' (single quotes)
+
+String literals: Two types: with backticks (raw string literal. This maintains the spacing)
+and double quotes (interpreted string literal)
+
+Can have initialize statements inside if statements
+e.g. if food := 'food'; true {
+fmt.Println(food)
+}
+
+here food is only available inside the if block
+
+resources: forum.golangbridge.org
+Dave Cheney blog
+**************************************
+
+**************************************
+Functions
+* 'Variadic functions'
+The final parameters in a function signature may have a type prefixed with ... A function with
+such a paramter is called variadic and may be invoked with zero or more arguments for that matter
+e.g. func (sf ...float64) flat64 {
+
+Variadic arguments:
+data := []float64{2, 3, 4}
+n := average(data...)
+// Speciality of variadic arguments is that, with reference to the above example
+// We can even do n := average() because a variadic parameter expects 0 or more of that type
+// to be passed
+
+# average receives float 1 by 1. Not in one go. As data is
+a slice but average expects a float64
+       func average(sf ...float64) float64 {
+
+       }
+
+}
+
+Everything in Go is pass by value
+
+Golang has callbacks and closures
+
+func main() {
+var z := 44
+changeMe(&z) // Passing 'value' of the address
+fmt.Println(z) // 24
+}
+
+func changeMe(z *int) {
+    // *z is the pointer to the address
+    *z = 24
+}
+
+
+* make:
+whenever we make anything with make
+it uses the reference of the type it created
+for e.g. in above 'z' example. If z was created using make
+and we wanted to pass the address. This time z itself is a reference
+hence &z is not required
+
+variable using with make is a reference to an array
+**************************************
+
+**************************************
+Data Structures
+
+1. array
+similart types and do not change size
+2. slice
+3. map
+4. struct (similar to objecct in other languages, can have properties and methods)
+a data structure
+a composite type
+
+While talking about data structures, think of real world analogies
+
+ARRAYS:
+e.g. I have an array of colors, I have an array of 5 BMWs
+array -> var x [5]string
+slice -> var x []string
+
+Not widely used. Its used by other data structures like slices
+
+SLICES:
+You can do slicing on a string ("myString"[2]) because a string is a slice of bytes.
+Remember:
+- A string is made up of runes.
+- A rune is a unicode code point.
+- A unicode code point is 1 to 4 bytes.
+Strings are made up of runes, runes, are made up og bytes, so strings are
+made up of bytes. A string is a bunch of bytes; a slice of bytes.
+
+Slice is pointing to an underlying array
+
+make([]int, length, capacity)
+length -> Size of the slice
+capacity -> Size of the underlying array
+if we overflow the 'capacity' go will automatically doubles the capacity
+of the underlying array upto a certia point, and they they increase
+in smaller amounts
+
+if length of slice is 2 and we add
+s[2] = "something" // It will complain, because it increases the size of the slice
+In the above case if we use append it would work fine
+
+Deleting from a slice is like the one in Javascript
+
+Slice of slice of strings
+records := make([][]slice, 0)
+// stud1
+stud1 := make([]string, 1)
+stud1[0] = "Foster"
+
+//append
+records = append(records, stud1)
+// stud2
+stud2 := make([]string, 1)
+//append
+records = append(records, stud2)
+Way of declaring:
+Shorthand, Var, Make
+Only make actually creates something in the memory and get a reference to the pointer
+E.g. s := []string{}
+s[0] = "Todd" // This will fail because we did not set the length of the underlying array
+// If we dont have length in a slice declaration we would have to use append to make a
+memory address
+// Converting array to slice:
+var a [24]byte
+a[:] // Produces a slice
+
+MAPS (It is a ref type same as slice and channels):
+Maps are for key values associations
+Like a dictionary
+
+It is built on top of a hash table.
+It is unordered
+
+e.g. m := make(map[string]int)
+m["k1"] = 7
+m["k2"] = 13
+// Can also be declared and defined as
+n := map[string]int{"foo": 1, "bar", 2} // Called composite literal
+
+delete(m, "k2")
+v, ok := m["k1"] // ok is true as k1 is present in the map
+v, ok := m["k2"] // ok is false as k2 is not present in the map
+
+// cannot declare a map like this and then assign
+var myG map[string]string
+myG["A"] = "Good"
+myG["B"] = "Awesome"
+myG == nil // true
+// It will give assignment to entry in nil map
+// We should do this instead
+var myG = map[string]string{} // Empty composite literal '{}' OR make(map[string]string)
+myG["A"] = "Good"
+myG == nil // false
+
+OR var myG = map[string]string{"Time": "Good Morning", "Jenny": "Good Morning"}
+OR myG := map[string]string{} // Empty composite or with values of course
+
+// Optimized if statement
+if val, exists := myGreeting[2]; exists {
+  // do something
+  // Here the scope of val and exists is only within this block
+}
+
+Comma ok idiom
+var timeZone = map[string]int{
+    "UTC": 0*60*60,
+}
+value, ok = timeZone["UTC"]
+returns -> value = 0, ok = true
+
+Hash tables (part of maps)
+Maps implements hash tables. Hash tables is one of the most useful data structures in computer science
+
+goinggo.net for maps. Good article
+
+Hash tables are built over arrays
+
+Maps from Hashtables, Hashtables from Arrays
+
+Hashtables allows us to do search really quickly
+Wikipedia explains it nicely
+
+Interesting: iterating over a scanner object.
+e.g.
+scanner := bufio.NewScanner(res.Body)
+scanner.Split(bufio.ScanWords)
+// Looping
+    for scanner.Scan() {
+    fmt.Println(scanner.Text())
+    }
+
+STRUCTS:
+Represents encapsulation in Go
+
+type person struct {
+    first string
+    last string
+}
+// Initialization:
+ob := person{}
+// The above will initialize the fields inside the struct to their default values
+OR person{"Puja", "Aeron"}
+
+INTERFACES:
+Substitutability
+
+Empty interfaces is implemented by all types
+Check println. It needs a variadic parameter of empty interface
+This disables the strictly type of nature golang has. As if a function
+has an empty interface type as a parameter we can pass anything to it.
+Should be careful while using empty interfaces
+
+Method Sets
+Value receivers "func (c circle) area() ..." and pointer receivers "func (c *circle) area() ..."
+Value receivers can take values and addresses (go dereferences the address), but for a pointer receiver it only takes addresses
+
+Receivers    Values
+(t T)        T and *T
+(t *T)       *T
+
+Conversion and Assertions
+1. Conversion: Converting from one type to another like float to int and vv
+2. Assertions: Is used only with interfaces
+
+1. Conversion : Converting from int to a float it is called "Widening" conversion
+Float to an Int is called a "Narrowing" conversion
+
+strconv package: Does a lot of conversion of data types
+e.g. Ascii to Int
+
+2. Assertions: Tells if a variable is a particular type of not. Just like isClass
+It works only with interfaces
+name := "Sydney"
+str, ok := name.(string)
+// The above will produce an error because assertion only needs interfaces
+var name interface{} = "Sydney"
+str, ok := name.(string)
+// Will work
+// ok is true
+var val interface{} = 7
+fmt.Println(val + 6) // This fails because it could not assert its an int
+// Complain invalid types, interface and int
+
+fmt.Println(val.(int) + 6) // This works because we explicitly assert is an int
+
+Casting is on the left side e.g. int(v)
+and Assertion is on the right side. v.(int)
+**************************************
+**************************************
+Concurrency and Parallelism
+
+I can do work concurrently for e.g. I can drink coffee and teach concurrently. I drink a sip of coffee
+and teach, I drink a sip and teach. Quickly changing my context from coffee to teaching.
+
+I cannot do work parallely. I cannot be drinking coffee and while drinking be teaching. Reason is I just
+have 1 processor. :D
+**************************************
